@@ -198,6 +198,9 @@
     opacity: 0; transition: opacity 1s;
   }
   body.on-floor .hint { opacity: 1; }
+  @media (min-width: 481px) and (max-height: 820px) {
+    .hint { bottom: 100px; font-size: 13px; line-height: 1.45; width: min(900px, 92vw); }
+  }
 
   .hud {
     position: fixed; left: 50%; bottom: 46px; transform: translate(-50%, 20px);
@@ -209,6 +212,10 @@
   }
   body.on-floor .hud { opacity: 1; transform: translate(-50%, 0); }
   .hud .pill { white-space: nowrap; }
+  @media (min-width: 481px) and (max-height: 820px) {
+    .hud { bottom: 38px; padding: 6px 6px 6px 18px; }
+    .hud .pill { padding-top: 9px; padding-bottom: 9px; }
+  }
   .hero-cite {
     position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
     z-index: 6; margin: 0; width: max-content; max-width: calc(100vw - 32px);
@@ -353,7 +360,8 @@
   .a-card p + p { margin-top: 10px; }
   .a-card p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(241,234,223,.45); }
   .a-card p a:hover, .a-card p a:focus-visible { text-decoration-color: currentColor; }
-  .a-actions { margin-top: 22px; }
+  .a-actions { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .a-actions a.pill { text-decoration: none; }
 
   .f-plan-grid { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(28px, 5vw, 64px); margin-top: 36px; }
   .f-plan-col { flex: 1 1 420px; max-width: 640px; display: flex; flex-direction: column; align-items: center; gap: 40px; }
@@ -524,11 +532,11 @@
   <p>1909 – 2006</p>
 </header>
 <div class="corner corner-r">
+    <button class="pill" id="aboutBtn">About</button>
     <button class="pill" id="soundBtn" aria-pressed="false"><span class="snd-dot" aria-hidden="true"></span>Music</button>
-  <button class="pill" id="aboutBtn">About</button>
 </div>
 
-<p class="hint" id="hint">Lights rest on her photograph. Touch any of them, in any order.</p>
+<p class="hint" id="hint">Lights rest on her image. Touch them in any order to discover photographs, films, and programs from her life and work.</p>
 
 <nav class="hud" aria-label="Lights touched">
   <div class="trail" aria-live="polite">
@@ -605,7 +613,7 @@
     <p>Your floor plan records the order you chose. It is not a reconstruction of Dunham&rsquo;s choreography.</p>
     <p>Jemima Wright and Ysanne Johnson, interns in the Library of Congress&rsquo;s Archives, History, and Heritage Advanced (AHHA) program, created this prototype with mentorship from Senior Innovation Specialist Kimber Thomas, as part of the Connecting Communities Digital Initiative (CCDI). Through archival research, interpretive design, and digital humanities methods, they aim to make the Library&rsquo;s collections more visible and to show how digital tools can bring unique historical records to a wider public.</p>
     <p>All items are from the Katherine Dunham Collection at the Library of Congress. Rights information for each item is available through its Library of Congress record or finding aid.</p>
-    <div class="a-actions"><button class="pill primary" id="aboutClose">Close</button></div>
+    <div class="a-actions"><a class="pill" href="https://www.loc.gov/collections/katherine-dunham/about-this-collection/" target="_blank" rel="noopener noreferrer">Learn more<span class="sr-only"> about the Katherine Dunham Collection (opens in a new tab)</span></a><button class="pill primary" id="aboutClose">Close</button></div>
   </div>
 </div>
 
@@ -886,9 +894,9 @@
     $("#finishBtn").disabled = state.order.length === 0;
     const left = MOMENTS.length - state.order.length;
     $("#hint").textContent = state.order.length === 0
-      ? "Lights rest on her photograph. Touch any of them, in any order."
+      ? "Lights rest on her image. Touch them in any order to discover photographs, films, and programs from her life and work."
       : left === 0
-        ? "You have touched every moment. Finish whenever you are ready."
+        ? "You have touched every light. Finish whenever you are ready."
         : `${left} light${left === 1 ? "" : "s"} still waiting. Keep going, or finish whenever you are ready.`;
   }
 
