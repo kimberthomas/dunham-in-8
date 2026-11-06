@@ -1101,6 +1101,7 @@
   function closeMoment() {
     if (state.open === null) return;
     $("#mVid").pause();
+    resumeMusic();
     momentEl.classList.remove("open");
     state.open = null;
     syncLayers();
@@ -1109,7 +1110,7 @@
   }
   $("#mBack").addEventListener("click", closeMoment);
   $("#mClose").addEventListener("click", closeMoment);
-  $("#mFinish").addEventListener("click", () => { momentEl.classList.remove("open"); state.open = null; openFinale(); });
+    $("#mFinish").addEventListener("click", () => { $("#mVid").pause(); resumeMusic(); momentEl.classList.remove("open"); state.open = null; openFinale(); });
 
   const finaleEl = $("#finale");
 
